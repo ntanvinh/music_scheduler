@@ -13,6 +13,7 @@
     "typescript": "^5.5.3"
   },
   "dependencies": {
+    "array-shuffle": "^3.0.0",
     "node-schedule": "^2.1.1",
     "sound-play": "^1.1.0",
     "tsx": "^4.19.1"

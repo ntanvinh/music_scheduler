@@ -4,4 +4,5 @@ export interface MusicTime {
   endTime: string; // hh:mm
   playlistPath: string;
   priorSongPaths?: string[];
+  shuffle?: boolean;
 }

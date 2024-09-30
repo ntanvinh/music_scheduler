@@ -3,6 +3,8 @@ import fs from "fs";
 import * as path from "node:path";
 import scheduler from "node-schedule";
 import { MUSIC_TIMES } from "./constants";
+import arrayShuffle from 'array-shuffle';
+import { timestamp } from "./utils/MusicUtils";
 
 function runMusicScheduler() {
 
@@ -17,19 +19,24 @@ function runMusicScheduler() {
 
     console.log("Chay lich bat nhac:", musicTime);
     scheduler.scheduleJob(`${startMinute} ${startHour} * * ${musicTime.weekdays}`, async () => {
-      console.log("Choi danh sach nhac");
-      let playlist = fs.readdirSync(musicTime.playlistPath)
+      console.log(timestamp(), "Choi danh sach nhac");
+      let playlist = fs.readdirSync(musicTime.playlistPath);
+      if (musicTime.shuffle) {
+        playlist = arrayShuffle(playlist);
+      }
+
       playlist = [...musicTime.priorSongPaths?.map(song => path.resolve(song)) ?? [], ...playlist.map(song => path.resolve(musicTime.playlistPath, song))];
       let currentTimeInMinutes = new Date().getHours() * 60 + new Date().getMinutes();
 
       while (currentTimeInMinutes < endTimeInMinutes) {
         for (const song of playlist) {
-          console.log("Dang bat bai hat", song);
+          console.log(timestamp(), "Dang bat bai hat", song);
           await player.play(song, 1).then();
+          console.log(timestamp(), "Ket thuc bai hat", song);
 
           currentTimeInMinutes = new Date().getHours() * 60 + new Date().getMinutes();
           if (currentTimeInMinutes > endTimeInMinutes) {
-            console.log("Dung danh sach nhac");
+            console.log(new Date().toISOString(), "Dung danh sach nhac");
             break;
           }
         }
