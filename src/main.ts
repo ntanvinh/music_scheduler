@@ -2,37 +2,9 @@ import player from "sound-play";
 import fs from "fs";
 import * as path from "node:path";
 import scheduler from "node-schedule";
-import { MusicTime } from "./interfaces/interfaces.ts";
+import { MUSIC_TIMES } from "./constants";
 
 function runMusicScheduler() {
-  const PLAYLIST1_DIR = "songs/playlist1";
-  const PLAYLIST2_DIR = "songs/playlist2";
-  const MUSIC_TIMES: MusicTime[] = [
-    {
-      weekdays: "*",
-      startTime: "23:59",
-      endTime: "23:59",
-      playlistPath: PLAYLIST1_DIR,
-      priorSongPaths: ["songs/QuocCa.mp3"]
-    },
-    {
-      weekdays: "1",
-      startTime: "07:50",
-      endTime: "09:00",
-      playlistPath: PLAYLIST1_DIR,
-      priorSongPaths: ["songs/QuocCa.mp3"]
-    },
-
-    { weekdays: "2-6", startTime: "07:50", endTime: "09:00", playlistPath: PLAYLIST1_DIR },
-    { weekdays: "1-5", startTime: "16:00", endTime: "17:15", playlistPath: PLAYLIST2_DIR },
-    {
-      weekdays: "6",
-      startTime: "16:00",
-      endTime: "17:15",
-      playlistPath: PLAYLIST2_DIR,
-      priorSongPaths: ["songs/QuocCa.mp3"]
-    },
-  ];
 
   for (const musicTime of MUSIC_TIMES) {
     const startTimeParts = musicTime.startTime.split(":");
@@ -67,4 +39,4 @@ function runMusicScheduler() {
 }
 
 runMusicScheduler();
-console.log("De dung chuong trinh vui long an Ctrl+C roi an Y roi an Enter");
+console.log("De dung chuong trinh vui long an Ctrl+C roi an Y");

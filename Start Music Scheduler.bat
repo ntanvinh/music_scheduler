@@ -1,2 +1,2 @@
-cd "C:\Users\Vinh\Documents\Dev\music_scheduler"
+cd "C:\music_scheduler"
 npm start

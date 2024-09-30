@@ -1,4 +1,6 @@
 # Logs
+*.mp3
+*.msi
 logs
 *.log
 npm-debug.log*
