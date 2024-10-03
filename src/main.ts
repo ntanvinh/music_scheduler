@@ -1,10 +1,9 @@
-import player from "sound-play";
+import * as player from "sound-play";
 import * as fs from "fs";
 import * as path from "node:path";
 import * as scheduler from "node-schedule";
 import { MUSIC_TIMES } from "./constants";
-import arrayShuffle from 'array-shuffle';
-import { timestamp } from "./utils/MusicUtils";
+import { arrayShuffle, timestamp } from "./utils/MusicUtils";
 import { MusicTime } from "./interfaces/interfaces.ts";
 
 function getCurrentTimeInMinutes() {
