@@ -1,0 +1,1 @@
+schtasks.exe /create /tn "Music Scheduler" /ru SYSTEM /Sc ONSTART /tr "C:\music_scheduler\StartMusicScheduler.sh"
