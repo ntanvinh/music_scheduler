@@ -1,38 +1,7 @@
-import * as player from "sound-play";
-import * as fs from "fs";
-import * as path from "node:path";
-import * as scheduler from "node-schedule";
+import scheduler from "node-schedule";
 import { MUSIC_TIMES } from "./constants";
-import { arrayShuffle, timestamp } from "./utils/MusicUtils";
-import { MusicTime } from "./interfaces/interfaces.ts";
-
-function getCurrentTimeInMinutes() {
-  return new Date().getHours() * 60 + new Date().getMinutes();
-}
-
-async function playPlaylist(musicTime: MusicTime, endTimeInMinutes: number) {
-  let playlist = fs.readdirSync(musicTime.playlistPath);
-  if (musicTime.shuffle) {
-    playlist = arrayShuffle(playlist);
-  }
-
-  playlist = [...musicTime.priorSongPaths?.map(song => path.resolve(song)) ?? [], ...playlist.map(song => path.resolve(musicTime.playlistPath, song))];
-  let currentTimeInMinutes = getCurrentTimeInMinutes();
-
-  while (currentTimeInMinutes < endTimeInMinutes) {
-    for (const song of playlist) {
-      console.log(timestamp(), "Dang bat bai hat", song);
-      await player.play(song, 1).then();
-      console.log(timestamp(), "Ket thuc bai hat", song);
-
-      currentTimeInMinutes = getCurrentTimeInMinutes();
-      if (currentTimeInMinutes > endTimeInMinutes) {
-        console.log(new Date().toISOString(), "Dung danh sach nhac");
-        break;
-      }
-    }
-  }
-}
+import { playPlaylist } from "./utils/MusicUtils";
+import { getCurrentTimeInMinutes, timestamp } from "./utils/DateUtils.ts";
 
 async function runMusicScheduler() {
 
@@ -54,12 +23,12 @@ async function runMusicScheduler() {
 
 
     console.log("Chay lich bat nhac:", musicTime);
-    scheduler.scheduleJob(`${startMinute} ${startHour} * * ${musicTime.weekdays}`, async () => {
+    scheduler.scheduleJob(`${ startMinute } ${ startHour } * * ${ musicTime.weekdays }`, async () => {
       console.log(timestamp(), "Choi danh sach nhac");
       await playPlaylist(musicTime, endTimeInMinutes);
     })
   }
-  console.log("De dung chuong trinh vui long an Ctrl+C roi an Y");
+  console.log("De dung chuong trinh vui long an Ctrl+C");
 }
 
 runMusicScheduler().then();

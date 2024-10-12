@@ -1,0 +1,28 @@
+[
+  {
+    "weekdays": "1",
+    "startTime": "07:45",
+    "endTime": "08:15",
+    "playlistPath": "songs/playlist1",
+    "priorSongPaths": ["songs/QuocCa.mp3"],
+    "shuffle": true
+  },
+  { "weekdays": "1,3,5", "startTime": "07:45", "endTime": "08:15", "playlistPath": "songs/playlist1", "shuffle": true },
+  { "weekdays": "2,4,6", "startTime": "07:45", "endTime": "08:15", "playlistPath": "songs/playlist2", "shuffle": true },
+  { "weekdays": "1,3,5", "startTime": "16:45", "endTime": "17:15", "playlistPath": "songs/playlist3", "shuffle": true },
+  { "weekdays": "2,4", "startTime": "16:45", "endTime": "17:15", "playlistPath": "songs/playlist4", "shuffle": true },
+  {
+    "weekdays": "6",
+    "startTime": "16:45",
+    "endTime": "17:15",
+    "playlistPath": "songs/playlist4",
+    "priorSongPaths": ["songs/QuocCa.mp3"],
+    "shuffle": true
+  },
+  { "weekdays": "1,3,5", "startTime": "09:50", "endTime": "10:00", "playlistPath": "songs/piano", "shuffle": true },
+  { "weekdays": "2,4,6", "startTime": "09:50", "endTime": "10:00", "playlistPath": "songs/piano", "shuffle": true },
+  { "weekdays": "1,3,5", "startTime": "12:00", "endTime": "12:15", "playlistPath": "songs/piano", "shuffle": true },
+  { "weekdays": "2,4,6", "startTime": "12:00", "endTime": "12:15", "playlistPath": "songs/violin", "shuffle": true },
+  { "weekdays": "1,3,5", "startTime": "14:50", "endTime": "15:00", "playlistPath": "songs/violin", "shuffle": true },
+  { "weekdays": "2,4,6", "startTime": "14:50", "endTime": "15:00", "playlistPath": "songs/violin", "shuffle": true }
+]
