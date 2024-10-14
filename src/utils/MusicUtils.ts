@@ -5,7 +5,10 @@ import { getCurrentTimeInMinutes, timestamp } from "./DateUtils.ts";
 import player from "sound-play";
 import { arrayShuffle } from "./ArrayUtils.ts";
 
+let IS_PLAYING_PLAYLIST = false;
+
 export async function playPlaylist(musicTime: MusicTime, endTimeInMinutes: number) {
+  IS_PLAYING_PLAYLIST = true;
   let playlist = fs.readdirSync(musicTime.playlistPath);
   if (musicTime.shuffle) {
     playlist = arrayShuffle(playlist);
@@ -30,4 +33,9 @@ export async function playPlaylist(musicTime: MusicTime, endTimeInMinutes: numbe
       }
     }
   }
+  IS_PLAYING_PLAYLIST = false;
+}
+
+export function isPlayingPlaylist() {
+  return IS_PLAYING_PLAYLIST;
 }

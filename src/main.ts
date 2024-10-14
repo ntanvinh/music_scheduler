@@ -1,6 +1,6 @@
 import scheduler from "node-schedule";
 import { MUSIC_TIMES } from "./constants";
-import { playPlaylist } from "./utils/MusicUtils";
+import { isPlayingPlaylist, playPlaylist } from "./utils/MusicUtils";
 import { getCurrentTimeInMinutes, timestamp } from "./utils/DateUtils.ts";
 
 async function runMusicScheduler() {
@@ -17,15 +17,19 @@ async function runMusicScheduler() {
     const currentTimeInMinutes = getCurrentTimeInMinutes();
 
     // play immediately if in music time
-    if (currentTimeInMinutes > startTimeInMinutes && currentTimeInMinutes < endTimeInMinutes) {
+    if (currentTimeInMinutes > startTimeInMinutes
+      && currentTimeInMinutes < endTimeInMinutes
+      && !isPlayingPlaylist()
+    ) {
       await playPlaylist(musicTime, endTimeInMinutes);
     }
-
 
     console.log("Chay lich bat nhac:", musicTime);
     scheduler.scheduleJob(`${ startMinute } ${ startHour } * * ${ musicTime.weekdays }`, async () => {
       console.log(timestamp(), "Choi danh sach nhac");
-      await playPlaylist(musicTime, endTimeInMinutes);
+      if (!isPlayingPlaylist()) {
+        await playPlaylist(musicTime, endTimeInMinutes);
+      }
     })
   }
   console.log("De dung chuong trinh vui long an Ctrl+C");
