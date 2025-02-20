@@ -25,7 +25,7 @@ async function runMusicScheduler() {
     }
 
     console.log("Chay lich bat nhac:", musicTime);
-    scheduler.scheduleJob(`${ startMinute } ${ startHour } * * ${ musicTime.weekdays }`, async () => {
+    scheduler.scheduleJob(`${ startMinute } ${ startHour } ${ musicTime.days ?? "*" } ${ musicTime.months ?? "*" } ${ musicTime.weekdays ?? "*" }`, async () => {
       console.log(timestamp(), "Choi danh sach nhac");
       if (!isPlayingPlaylist()) {
         await playPlaylist(musicTime, endTimeInMinutes);
